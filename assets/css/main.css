@@ -337,6 +337,48 @@ p.footnote {
 .grid-center {
   padding: 0 12.5%;
 }
+code,
+tt {
+  font-family: Inconsolata,monospace;
+  font-size: 0.85em;
+  white-space: pre-wrap;
+  background: #f1f0ea;
+  border: 1px solid #dddbcc;
+  border-radius: 2px;
+  padding: 1px 3px;
+}
+ul.tags {
+  list-style-type: none;
+  margin: 0px 0px 20px 0px;
+  padding: 7px 5px 7px 5px;
+}
+ul.tags li {
+  display: inline-block;
+  padding: 0px 3px 0px 3px;
+  width: 54px;
+  height: 48px;
+}
+li.tag-code {
+  background: url('../images/code.png') no-repeat;
+}
+li.tag-design {
+  background: url('../images/design.png') no-repeat;
+}
+li.tag-cloud {
+  background: url('../images/cloud.png') no-repeat;
+}
+li.tag-entrepreneurship {
+  background: url('../images/entrepreneurship.png') no-repeat;
+}
+li.tag-innovation {
+  background: url('../images/innovation.png') no-repeat;
+}
+li.tag-wordpress {
+  background: url('../images/wordpress.png') no-repeat;
+}
+li.tag-apple {
+  background: url('../images/apple.png') no-repeat;
+}
 header.article-header {
   margin-bottom: 3em;
 }
