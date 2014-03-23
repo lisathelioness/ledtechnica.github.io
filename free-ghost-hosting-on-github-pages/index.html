@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+    <title>Free Ghost Hosting on GitHub Pages</title>
+    <meta name="description" content="" />
+
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="MobileOptimized" content="320" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="shortcut icon" href="../assets/favicon.ico">
+    <link rel="stylesheet" type="text/css" href="../assets/css/normalize.css" />
+    <link rel="stylesheet" type="text/css" href="../assets/css/main.css" />
+
+    <meta name="generator" content="Ghost 0.4" />
+<link rel="alternate" type="application/rss+xml" title="LED Technica" href="../rss/index.html">
+<link rel="canonical" href="index.html" />
+</head>
+<body class="post-template tag-code">
+
+    <header id="site-head">
+  <div id="site-head-inner" class="grid grid-pad">
+    <h1 class="blog-title BrandonPrinted-One"><a href="../index.html">LED Technica</a></h1>
+    <h2 class="blog-description BrandonPrinted-One">&lt;3 everything web</h2>
+    
+      <div id="blog-logo"><img src="../content/images/2014/Mar/ledtechnica.png" alt="LED Technica"></div>
+    
+  </div>
+</header>
+
+    
+
+<main class="content" role="main">
+  <div class="grid grid-pad grid-center">
+  <article class="post tag-code">
+    
+      <header>
+        <div class="post-meta tags">Posted in code</div>
+        <h1 class="post-title">Free Ghost Hosting on GitHub Pages</h1>
+        <div class="post-meta"><time datetime="2014-03-23">28 minutes ago</time></div>
+      </header>
+
+      <section class="post-content">
+        <p>I am one of those people whom being called a <a href="http://en.wikipedia.org/wiki/Geek">geek</a> is a compliment. I have been using <a href="http://wordpress.org/">WordPress</a> for a long time now and while it has many great features and themes, I always found it to be too complicated for running a simple blog. So imagine my excitement when I heard about the <a href="https://ghost.org/">Ghost</a> blogging platform being released.</p>
+
+<p>Awesome folks at Ghost made it really easy to use and deploy and even have installers for some cloud providers such as <a href="https://www.digitalocean.com/">Digital Ocean</a>. I have initially deployed a blog using the Digital Ocean installer to play around but creating and managing a dedicated droplet for this purpose also seemed like an overkill.</p>
+
+<p>So once Ghost started offering hosted blogs I immediately signed up and started moving <a href="http://ledtechnica.com">LED Technica</a> over there. While it has been relatively easy to use, managing my custom theme became a little hassle. For example, just to add some CSS I had to repackage the theme in a zip file and upload it to the Ghost hosted platform.</p>
+
+<p>So when I was doing some research on options, I ran into an <a href="https://jackpearce.com/have-a-lightning-fast-blog-and-host-it-for-free/">excellent article by Jack Pearce</a> about how he managed to move his Ghost blog to GitHub pages, which provided him with free hosting that was also faster.</p>
+
+<p>GitHub pages basically provides &ldquo;<em>websites for you and your projects, which are hosted directly from your GitHub repository</em>&rdquo;. I knew it was popular with the <a href="http://jekyllrb.com/">Jekyll</a> crowd (which is another blogging platform especially favored by Ruby on Rails developers) but I did not think it would help me with Ghost hosting as GitHub Pages can only host static content.</p>
+
+<p><img src="../content/images/2014/Mar/github_pages.png" alt="GitHub Pages" class="center"></p>
+
+<p>Jack Pearce in his article mentioned of a tool called <a href="https://github.com/axitkhurana/buster">Buster</a> which is a &ldquo;<em>brute force static site generator for Ghost</em>&rdquo;. And voilà, suddenly a world of possibilities opened up for hosting <a href="http://ledtechnica.com">LED Technica</a> on GitHub Pages.</p>
+
+<p>Below are the speed test results between Ghost Hosted Platform and the GitHub Pages:</p>
+
+<h4 class="center">Ghost Hosted Platform</h4>
+
+<p><img src="../content/images/2014/Mar/ghost_io_speed.png" alt="Ghost Hosted Platform speed test results" class="center"></p>
+
+<h4 class="center">GitHub Pages</h4>
+
+<p><img src="../content/images/2014/Mar/github_io_speed.png" alt="GitHub Pages speed test results" class="center"></p>
+
+<p>While I did not experience the same load time gains as Jack Pearce (moving from 1.6s to 330ms) there was still some significant improvements. </p>
+
+<p>His article provides some instructions with links to additional resources but I ended up having to bounce a little bit so I decided to summarized below the steps I followed (I am on a Mac):</p>
+
+<h3 id="installbuster">Install Buster</h3>
+
+<ul>
+<li><code>pip install buster</code> (to install buster)</li>
+<li><code>brew install wget</code> (required by buster)</li>
+</ul>
+
+<h3 id="setupghostlocally">Setup Ghost locally</h3>
+
+<ul>
+<li>Download <a href="https://ghost.org/download/">Ghost</a></li>
+<li>Unzip and go to the directory</li>
+<li><code>npm install</code></li>
+<li><code>npm start</code> to run Ghost locally</li>
+<li>Visit <a href='http://127.0.0.1:2368/ghost'>http://127.0.0.1:2368/ghost</a> to create an admin account and setup Ghost locally</li>
+<li>I then loaded my custom theme to content/themes subfolder in the Ghost installation (you need to restart Ghost locally to see the new theme under the settings)</li>
+<li>Create your articles and make changes to the theme as needed and test everything locally</li>
+</ul>
+
+<h3 id="creategithubpagesrepoampsetupbuster">Create GitHub Pages repo &amp; set up Buster</h3>
+
+<ul>
+<li>Go to your <a href="https://github.com">GitHub</a> account and create a public repo named accountname.github.io (in my case it was ledtechnica.github.io)</li>
+<li>I switched to a different folder from the Ghost installation to keep the generated static files separately</li>
+<li>From the selected folder run <code>buster setup</code> and enter the repo address you just created when prompted (e.g. <a href='https://github.com/ledtechnica/ledtechnica.github.io.git'>https://github.com/ledtechnica/ledtechnica.github.io.git</a>)</li>
+<li>Once this is done, run <code>buster generate --domain=http://127.0.0.1:2368</code> which will generate all the needed files under the static subfolder created in the previous step.</li>
+<li><code>cd static</code> to switch into static subfolder, <code>git add -all</code> and then <code>git commit -m 'Initial commit'</code> followed by a <code>git push</code> to upload your repo to GitHub.</li>
+<li>GitHub Pages indicate that you might need to wait for up to 10 minutes to see your repo but in my case it took around 20 minutes. So if you are the impatient type like me, you might need to do a bunch of refreshes to finally see your blog.</li>
+</ul>
+
+<h3 id="customdomain">Custom Domain</h3>
+
+<ul>
+<li>Create a file named CNAME in the static folder and include your custom domain name in it - e.g. ledtechnica.com</li>
+<li>Commit and push the changes to GitHub and don't forget to update your DNS records.</li>
+</ul>
+
+<p>While I agree it is not for the faint-hearted, I really enjoy gaining back the ability to modify and test all my changes locally for the theme. Furthermore, I can write my blog posts on my laptop without an Internet connection and just generate the site with Buster and push it to GitHub.</p>
+      </section>
+
+      <section class="share">
+        <p class="info">Share this post</p>
+        <a class="icon-twitter" href="http://twitter.com/share?text=Free Ghost Hosting on GitHub Pages&url=http://ledtechnica.dev/free-ghost-hosting-on-github-pages/"
+        onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+        <span class="hidden">Twitter</span>
+        </a>
+        <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=http://ledtechnica.dev/free-ghost-hosting-on-github-pages/"
+        onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+        <span class="hidden">Facebook</span>
+        </a>
+        <a class="icon-google-plus" href="https://plus.google.com/share?url=http://ledtechnica.dev/free-ghost-hosting-on-github-pages/"
+        onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+        <span class="hidden">Google+</span>
+        </a>
+      </section>
+
+      <footer class="post-footer">
+        
+          <section class="author">
+            <div class="authorimage" style="background: url(http://www.gravatar.com/avatar/1cc562b4f90057865f792eca02169695?d=404)"></div>
+            <p class="attr">Author</p>
+            <h4><a href="index.html">LED Technica</a></h4>
+            <p class="bio">Hi, I am Miro. LED Technica is my blog where I write about my passions — web design &amp; development. I am also working on few startup ideas so I also talk about things I learn along my  journey.</p>
+          </section>
+        
+      </footer>
+    
+
+    <!-- Disqus comments
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'ledtechnica'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        var disqus_identifier = '14';
+
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+  -->
+
+  </article>
+  </div>
+</main>
+
+    <footer class="site-footer">
+  <div class="inner">
+     <a href="../rss/index.html" title="Subscribe!" class="tooltip subscribe"><i class="fa fa-rss"></i></a>
+    <section class="copyright">
+      &copy; 2014 <a href="../index.html">LED Technica</a>. All rights reserved.
+    </section>
+  </div>
+</footer>
+
+
+    <script src="../shared/vendor/jquery/jquery.js?v=179f051b8c"></script>
+
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-18689260-11']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+</body>
+</html>

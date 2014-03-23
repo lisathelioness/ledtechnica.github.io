@@ -1,5 +1,70 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[LED Technica]]></title><description><![CDATA[<3 everything web]]></description><link>http://ledtechnica.dev/</link><generator>Ghost v0.4.1</generator><lastBuildDate>Sun, 23 Mar 2014 04:30:19 GMT</lastBuildDate><atom:link href="http://ledtechnica.dev/rss/" rel="self" type="application/rss+xml"/><author><![CDATA[LED Technica]]></author><ttl>60</ttl><item><title><![CDATA[Woahbar: Free Alternative to Hello Bar]]></title><description><![CDATA[<p>I really liked the concept of <a title="Hello Bar" href='http://www.hellobar.com/'  target="_blank">Hello Bar</a> but did not want to pay for the service for my personal blog which runs on <a title="WordPress" href='http://wordpress.org/'  target="_blank">WordPress</a>. So when I was looking around for alternatives I realized they have also released  <a title="Hello Bar Solo" href='http://www.hellobar.com/solo/'  target="_blank">HelloBar Solo</a>, which is a one-time paid download that I could include on my site. Another candidate I found that also looked interesting was the <a title="WOAHBar" href='http://woahbar.com/'  target="_blank">WOAHBar</a>.</p>
+<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[LED Technica]]></title><description><![CDATA[<3 everything web]]></description><link>http://ledtechnica.dev/</link><generator>Ghost v0.4.1</generator><lastBuildDate>Sun, 23 Mar 2014 05:47:53 GMT</lastBuildDate><atom:link href="http://ledtechnica.dev/rss/" rel="self" type="application/rss+xml"/><author><![CDATA[LED Technica]]></author><ttl>60</ttl><item><title><![CDATA[Free Ghost Hosting on GitHub Pages]]></title><description><![CDATA[<p>I am one of those people whom being called a <a href='http://en.wikipedia.org/wiki/Geek' >geek</a> is a compliment. I have been using <a href='http://wordpress.org/' >WordPress</a> for a long time now and while it has many great features and themes, I always found it to be too complicated for running a simple blog. So imagine my excitement when I heard about the <a href='https://ghost.org/' >Ghost</a> blogging platform being released.</p>
+
+<p>Awesome folks at Ghost made it really easy to use and deploy and even have installers for some cloud providers such as <a href='https://www.digitalocean.com/' >Digital Ocean</a>. I have initially deployed a blog using the Digital Ocean installer to play around but creating and managing a dedicated droplet for this purpose also seemed like an overkill.</p>
+
+<p>So once Ghost started offering hosted blogs I immediately signed up and started moving <a href='http://ledtechnica.com/' >LED Technica</a> over there. While it has been relatively easy to use, managing my custom theme became a little hassle. For example, just to add some CSS I had to repackage the theme in a zip file and upload it to the Ghost hosted platform.</p>
+
+<p>So when I was doing some research on options, I ran into an <a href='https://jackpearce.com/have-a-lightning-fast-blog-and-host-it-for-free/' >excellent article by Jack Pearce</a> about how he managed to move his Ghost blog to GitHub pages, which provided him with free hosting that was also faster.</p>
+
+<p>GitHub pages basically provides &ldquo;<em>websites for you and your projects, which are hosted directly from your GitHub repository</em>&rdquo;. I knew it was popular with the <a href='http://jekyllrb.com/' >Jekyll</a> crowd (which is another blogging platform especially favored by Ruby on Rails developers) but I did not think it would help me with Ghost hosting as GitHub Pages can only host static content.</p>
+
+<p><img src='http://ledtechnica.dev/content/images/2014/Mar/github_pages.png'  alt="GitHub Pages" class="center"></p>
+
+<p>Jack Pearce in his article mentioned of a tool called <a href='https://github.com/axitkhurana/buster' >Buster</a> which is a &ldquo;<em>brute force static site generator for Ghost</em>&rdquo;. And voilà, suddenly a world of possibilities opened up for hosting <a href='http://ledtechnica.com/' >LED Technica</a> on GitHub Pages.</p>
+
+<p>Below are the speed test results between Ghost Hosted Platform and the GitHub Pages:</p>
+
+<h4 class="center">Ghost Hosted Platform</h4>
+
+<p><img src='http://ledtechnica.dev/content/images/2014/Mar/ghost_io_speed.png'  alt="Ghost Hosted Platform speed test results" class="center"></p>
+
+<h4 class="center">GitHub Pages</h4>
+
+<p><img src='http://ledtechnica.dev/content/images/2014/Mar/github_io_speed.png'  alt="GitHub Pages speed test results" class="center"></p>
+
+<p>While I did not experience the same load time gains as Jack Pearce (moving from 1.6s to 330ms) there was still some significant improvements. </p>
+
+<p>His article provides some instructions with links to additional resources but I ended up having to bounce a little bit so I decided to summarized below the steps I followed (I am on a Mac):</p>
+
+<h3 id="installbuster">Install Buster</h3>
+
+<ul>
+<li><code>pip install buster</code> (to install buster)</li>
+<li><code>brew install wget</code> (required by buster)</li>
+</ul>
+
+<h3 id="setupghostlocally">Setup Ghost locally</h3>
+
+<ul>
+<li>Download <a href='https://ghost.org/download/' >Ghost</a></li>
+<li>Unzip and go to the directory</li>
+<li><code>npm install</code></li>
+<li><code>npm start</code> to run Ghost locally</li>
+<li>Visit <a href='http://127.0.0.1:2368/ghost' >http://127.0.0.1:2368/ghost</a> to create an admin account and setup Ghost locally</li>
+<li>I then loaded my custom theme to content/themes subfolder in the Ghost installation (you need to restart Ghost locally to see the new theme under the settings)</li>
+<li>Create your articles and make changes to the theme as needed and test everything locally</li>
+</ul>
+
+<h3 id="creategithubpagesrepoampsetupbuster">Create GitHub Pages repo &amp; set up Buster</h3>
+
+<ul>
+<li>Go to your <a href='https://github.com/' >GitHub</a> account and create a public repo named accountname.github.io (in my case it was ledtechnica.github.io)</li>
+<li>I switched to a different folder from the Ghost installation to keep the generated static files separately</li>
+<li>From the selected folder run <code>buster setup</code> and enter the repo address you just created when prompted (e.g. <a href='https://github.com/ledtechnica/ledtechnica.github.io.git' >https://github.com/ledtechnica/ledtechnica.github.io.git</a>)</li>
+<li>Once this is done, run <code>buster generate --domain=http://127.0.0.1:2368</code> which will generate all the needed files under the static subfolder created in the previous step.</li>
+<li><code>cd static</code> to switch into static subfolder, <code>git add -all</code> and then <code>git commit -m 'Initial commit'</code> followed by a <code>git push</code> to upload your repo to GitHub.</li>
+<li>GitHub Pages indicate that you might need to wait for up to 10 minutes to see your repo but in my case it took around 20 minutes. So if you are the impatient type like me, you might need to do a bunch of refreshes to finally see your blog.</li>
+</ul>
+
+<h3 id="customdomain">Custom Domain</h3>
+
+<ul>
+<li>Create a file named CNAME in the static folder and include your custom domain name in it - e.g. ledtechnica.com</li>
+<li>Commit and push the changes to GitHub and don't forget to update your DNS records.</li>
+</ul>
+
+<p>While I agree it is not for the faint-hearted, I really enjoy gaining back the ability to modify and test all my changes locally for the theme. Furthermore, I can write my blog posts on my laptop without an Internet connection and just generate the site with Buster and push it to GitHub.</p>]]></description><link>http://ledtechnica.dev/free-ghost-hosting-on-github-pages/</link><guid isPermaLink="false">310a32c5-0fd4-4c7d-bf1e-6e5c0ec18b3a</guid><category><![CDATA[code]]></category><dc:creator><![CDATA[LED Technica]]></dc:creator><pubDate>Sun, 23 Mar 2014 05:19:31 GMT</pubDate></item><item><title><![CDATA[Woahbar: Free Alternative to Hello Bar]]></title><description><![CDATA[<p>I really liked the concept of <a title="Hello Bar" href='http://www.hellobar.com/'  target="_blank">Hello Bar</a> but did not want to pay for the service for my personal blog which runs on <a title="WordPress" href='http://wordpress.org/'  target="_blank">WordPress</a>. So when I was looking around for alternatives I realized they have also released  <a title="Hello Bar Solo" href='http://www.hellobar.com/solo/'  target="_blank">HelloBar Solo</a>, which is a one-time paid download that I could include on my site. Another candidate I found that also looked interesting was the <a title="WOAHBar" href='http://woahbar.com/'  target="_blank">WOAHBar</a>.</p>
 
 <p>I wanted to check Hello Bar Solo first but when reading <a title="Hello Bar Solo on Wordpress" href='http://www.hellobar.com/blog/hello-bar-solo-wordpress-installation'  target="_blank">this post</a> regarding installation on WordPress, I saw a lot of people were having problems with the installation. Since I did not want to shell out $29 and then find out I run into similar issues as well, I decided to give WOAHBar a try.</p>
 
