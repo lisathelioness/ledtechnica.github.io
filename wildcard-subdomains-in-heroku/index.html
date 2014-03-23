@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+    <title>Wildcard Subdomains in Heroku</title>
+    <meta name="description" content="" />
+
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="MobileOptimized" content="320" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="shortcut icon" href="../assets/favicon.ico">
+    <link rel="stylesheet" type="text/css" href="../assets/css/normalize.css" />
+    <link rel="stylesheet" type="text/css" href="../assets/css/main.css" />
+
+    <meta name="generator" content="Ghost 0.4" />
+<link rel="alternate" type="application/rss+xml" title="LED Technica" href="../rss/index.html">
+<link rel="canonical" href="index.html" />
+</head>
+<body class="post-template tag-cloud-computing">
+
+    <header id="site-head">
+  <div id="site-head-inner" class="grid grid-pad">
+    <h1 class="blog-title BrandonPrinted-One"><a href="../index.html">LED Technica</a></h1>
+    <h2 class="blog-description BrandonPrinted-One">&lt;3 everything web</h2>
+    
+      <div id="blog-logo"><img src="../content/images/2014/Mar/ledtechnica.png" alt="LED Technica"></div>
+    
+  </div>
+</header>
+
+    
+
+<main class="content" role="main">
+  <div class="grid grid-pad grid-center">
+  <article class="post tag-cloud-computing">
+    
+      <header>
+        <div class="post-meta tags">Posted in cloud computing</div>
+        <h1 class="post-title">Wildcard Subdomains in Heroku</h1>
+        <div class="post-meta"><time datetime="2013-09-13">6 months ago</time></div>
+      </header>
+
+      <section class="post-content">
+        <p><img class="alignright" alt="browser" src="../content/images/2014/Mar/browser.png" width="300" height="296" /></p>
+
+<p><strong>Wildcard subdomains</strong> are used primarily to handle name resolution to all subdomains for your domain. It is managed through a <a title="Description of Wildcard DNS records from Wikipedia" href="http://en.wikipedia.org/wiki/Wildcard_DNS_record">wildcard DNS record</a>, which “is a record in a DNS zone that will match requests for non-existent domain names”.</p>
+
+<h2>Wildcard subdomains but why?</h2>  
+
+<p>I am working on a multitenant Ruby on Rails app that creates a subdomain for each registered account. The main reason for creating specific subdomains for each account is to scope <sup><a class="footnote-link" id="reference-1" title="Link to footnote on scoping" href="index.html#footnote-1">[1]</a></sup> the associated data to prevent unauthorized access. While there are other ways to make this happen, such as using PostgreSQL schemas, I decided to go with scoping as it is somewhat simpler to implement.</p>
+
+<p>I needed to handle two technical details for this to happen. The first one was for my DNS service to resolve <em>each wildcard subdomain</em> to a correct host, which thanks to my DNS provider – <a title="DNSimple, a great DNS provider" href="http://dnsimple.com">DNSimple</a> – was relatively simple. All I needed to do was create a CNAME record for *.mydomain.com to point to my web server (which was proxy.herokuapp.com in my case).</p>
+
+<p>The second thing I needed to do to make the <span class="underline">wildcard subdomains</span> work was to find a way for my web server – which in my case was hosted by <a href="http://www.heroku.com/">Heroku</a> – to correctly serve the application using that subdomain.</p>
+
+<p>While it is feasible to add the subdomain for each new client through an API call to Heroku after account creation so that the application only responds to specific client subdomains, I was lazy so I added the *.mydomain.com to my application's configuration in Heroku which worked greatly.</p>
+
+<h2>Until the day came</h2>  
+
+<p>When I realized that I needed to create another app on the same domain with a distinct subdomain. To see how I can best handle this case, I searched Heroku's knowledge base and came across an article on how to setup “<a title="Custom Domains article in Heroku Knowledge Base" href="https://devcenter.heroku.com/articles/custom-domains">Custom Domains</a>”. Unfortunately it did not really apply to my scenario so I did the next best thing and checked on <a title="Stack Overflow - Q&amp;A site for programmers" href="http://stackoverflow.com/">Stack Overflow</a>. While I seem to misplace the one link that kind of covered this scenario, after some research it seemed like it was not feasible to assign a new subdomain to another app.</p>
+
+<p>So I decided to test this out myself by:</p>
+
+<ol>  
+<li>Setting up a new app in Heroku and</li>  
+<li>Adding the specific subdomain — api.mydomain.com — to the new application in Heroku management console</li>  
+</ol>  
+
+<p>While I feel like the cat per <a href="http://www.quotegarden.com/experience.html">Mark Twain's quote</a> below — not sure if there is any wisdom gained from this experience, so far this approach seems to work. My specific subdomain is pointing to the new application, while all other wildcard subdomains still point to the primary app.</p>
+
+<blockquote>We should be careful to get out of an experience only the wisdom that is in it - and stop there; lest we be like the cat that sits down on a hot stove-lid.  She will never sit down on a hot stove-lid again - and that is well; but also she will never sit down on a cold one anymore.
+
+</blockquote>  
+
+<p><p class="footnote" id="footnote-1"><sup>[1]</sup> Railscasts has a <a href="http://railscasts.com/episodes/388-multitenancy-with-scopes">great episode</a> on scoping your users using subdomains. It is a pro episode and needs subscription but I strongly recommend it if you would like to learn about scoping your users/accounts. <a class="footnote-link" title="Jump back to footnote 1 in the text." href="index.html#reference-1">↩</a></p>
+      </section>
+
+      <section class="share">
+        <p class="info">Share this post</p>
+        <a class="icon-twitter" href="http://twitter.com/share?text=Wildcard Subdomains in Heroku&url=http://ledtechnica.dev/wildcard-subdomains-in-heroku/"
+        onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+        <span class="hidden">Twitter</span>
+        </a>
+        <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=http://ledtechnica.dev/wildcard-subdomains-in-heroku/"
+        onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+        <span class="hidden">Facebook</span>
+        </a>
+        <a class="icon-google-plus" href="https://plus.google.com/share?url=http://ledtechnica.dev/wildcard-subdomains-in-heroku/"
+        onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+        <span class="hidden">Google+</span>
+        </a>
+      </section>
+
+      <footer class="post-footer">
+        
+          <section class="author">
+            <div class="authorimage" style="background: url(http://www.gravatar.com/avatar/1cc562b4f90057865f792eca02169695?d=404)"></div>
+            <p class="attr">Author</p>
+            <h4><a href="index.html">LED Technica</a></h4>
+            <p class="bio">Hi, I am Miro. LED Technica is my blog where I write about my passions — web design &amp; development. I am also working on few startup ideas so I also talk about things I learn along my  journey.</p>
+          </section>
+        
+      </footer>
+    
+
+    <!-- Disqus comments
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'ledtechnica'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        var disqus_identifier = '8';
+
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+  -->
+
+  </article>
+  </div>
+</main>
+
+    <footer class="site-footer">
+  <div class="inner">
+     <a href="../rss/index.html" title="Subscribe!" class="tooltip subscribe"><i class="fa fa-rss"></i></a>
+    <section class="copyright">
+      &copy; 2014 <a href="../index.html">LED Technica</a>. All rights reserved.
+    </section>
+  </div>
+</footer>
+
+
+    <script src="../shared/vendor/jquery/jquery.js?v=179f051b8c"></script>
+
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-18689260-11']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+</body>
+</html>

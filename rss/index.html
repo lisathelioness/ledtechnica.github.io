@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[LED Technica]]></title><description><![CDATA[<3 everything web]]></description><link>http://ledtechnica.dev/</link><generator>Ghost v0.4.1</generator><lastBuildDate>Sun, 23 Mar 2014 04:30:19 GMT</lastBuildDate><atom:link href="http://ledtechnica.dev/rss/" rel="self" type="application/rss+xml"/><author><![CDATA[LED Technica]]></author><ttl>60</ttl><item><title><![CDATA[Woahbar: Free Alternative to Hello Bar]]></title><description><![CDATA[<p>I really liked the concept of <a title="Hello Bar" href='http://www.hellobar.com/'  target="_blank">Hello Bar</a> but did not want to pay for the service for my personal blog which runs on <a title="WordPress" href='http://wordpress.org/'  target="_blank">WordPress</a>. So when I was looking around for alternatives I realized they have also released  <a title="Hello Bar Solo" href='http://www.hellobar.com/solo/'  target="_blank">HelloBar Solo</a>, which is a one-time paid download that I could include on my site. Another candidate I found that also looked interesting was the <a title="WOAHBar" href='http://woahbar.com/'  target="_blank">WOAHBar</a>.</p>
+
+<p>I wanted to check Hello Bar Solo first but when reading <a title="Hello Bar Solo on Wordpress" href='http://www.hellobar.com/blog/hello-bar-solo-wordpress-installation'  target="_blank">this post</a> regarding installation on WordPress, I saw a lot of people were having problems with the installation. Since I did not want to shell out $29 and then find out I run into similar issues as well, I decided to give WOAHBar a try.</p>
+
+<p>After a few tweaks - some of which was accompanied with some cussing - I was finally able to get it to work so wanted to share the few pointers:</p>
+
+<ol>  
+<li>WordPress loads jQuery in <a title="jQuery noConflict" href='http://api.jquery.com/jQuery.noConflict/'  target="_blank">noConflict</a> mode, which meant that I needed to edit the woahbar.js to use jQuery as opposed to $.</li>  
+<li>WOAHBar uses some functions from <a title="jQuery UI" href='http://jqueryui.com/'  target="_blank">jQuery-UI</a> - primarily from the Effects library. Since WordPress does not load these by default, I have downloaded a customized version of jQuery UI Effects and included it with the woahbar.js file.</li>  
+<li>I have added the script and css loading to my themes' function.php file.</li>  
+</ol>  
+
+<p>Here is the link to the <a title="Code on GitHub" href='https://github.com/ledtechnica/woahbar-wordpress'  target="_blank">final code on GitHub</a> in case you would like to implement this in your WordPress blog.</p>
+
+<p><span style="text-decoration: underline"><strong>Update:</strong></span></p>
+
+<p>This <a href='http://viget.com/advance/how-to-track-internal-links-in-google-analytics'  target="_blank">article</a> also shows a nice way to add Google Analytics tracking to the links on the WOAHBar.</p>]]></description><link>http://ledtechnica.dev/woahbar-free-alternative-to-hello-bar/</link><guid isPermaLink="false">0daae42b-2372-41d3-afb5-86ba701dcdca</guid><category><![CDATA[wordpress]]></category><dc:creator><![CDATA[LED Technica]]></dc:creator><pubDate>Wed, 05 Feb 2014 21:56:00 GMT</pubDate></item><item><title><![CDATA[AWS IAM Policy Simulator]]></title><description><![CDATA[<p>I am really excited about this <a title="AWS IAM Policy Simulator" href='http://aws.typepad.com/aws/2013/10/aws-identity-and-access-management-policy-simulator.html' >news</a> from Amazon announcing that they have released  the <strong>AWS Identity and Access Management policy simulator</strong>. In case you have no idea what I am talking about, <a title="What is AWS Identity and Access Management?" href='http://docs.aws.amazon.com/IAM/latest/UserGuide/IAM_Introduction.html' >AWS Identity and Access Management</a> (IAM) is “<em>a web service that enables Amazon Web Services (AWS) customers to manage users and user permissions in AWS. The service is targeted at organizations with multiple users or systems that use AWS products such as Amazon EC2, Amazon RDS, and the AWS Management Console. With IAM, you can centrally manage users, security credentials such as access keys, and permissions that control which AWS resources users can access.”</em></p>
+
+<p>While I have been using IAM for managing basic access control to AWS resources from some of our web applications - and hence our policies are usually not that complicated or crazy - the new AWS IAM Policy Simulator should be a great resources for more advanced users - such as those using AWS IAM Federation, etc.</p>
+
+<p>&nbsp;</p>
+
+<h3>AWS IAM Policy Simulator Rocks</h3>  
+
+<p>The tool basically helps admins simulate the effects of policies either by users and groups by running policies against the appropriate AWS resource you are testing. You select a user or a group and the AWS resource you would like to validate the assigned policies against. The policy simulator also allows to either select all possible actions for that AWS resource or specific ones you would like to target. Once the simulation is complete, the tool let's you know due to which policy access to a certain action was allowed or denied, which I found to be very useful (which also includes the default AWS policies).</p>
+
+<div class="center" style="text-align:center;">  
+<iframe width="640" height="390" src='http://www.youtube.com/embed/1IIhVcXhvcE'  frameborder="0" allowfullscreen></iframe>  
+</div>
+
+<p>Before this tool, I had to change a policy on AWS and then test access (in some cases manually) from our staging server to ensure that the assigned IAM user could access the resources properly. This of course got complicated when there were different levels of access to AWS resources. With the new AWS IAM Policy Simulator, I can ensure that the identity I am working with has the proper access rights and restrictions and do not need to worry about an additional testing from our staging servers. This is especially useful when providing different levels of access to different users on the same S3 bucket. The IAM Policy Simulator lets you test this by allowing you to adjust the simulation settings. As shown below, you can select specific resources in S3 for example to simulate your policies against.</p>
+
+<p><img class="alignnone size-full wp-image-591" alt="iam_policy_simulator_settings" src='https://ledtechnica.com/wp-content/uploads/2013/11/iam_policy_simulator_settings.png'  width="913" height="346" /></p>
+
+<p>Anyway I am really excited about this and hopefully you will get a chance to test it out for yourself. You can find more info about AWS Identity and Access Management Policy Simulator as well as IAM in more general in<a title="AWS Documentation" href='http://aws.amazon.com/documentation/' > AWS Docs</a>. The <a title="Short Intro to AWS IAM Policy Simulator" href='http://www.youtube.com/watch?v=1IIhVcXhvcE' >AWS IAM Policy Simulator</a> video in this post is from the official YouTube channel of <a title="AWS Official YouTube Channel" href='http://www.youtube.com/user/AmazonWebServices' >Amazon Web Services</a> where you can find additional useful videos.</p>]]></description><link>http://ledtechnica.dev/aws-iam-policy-simulator/</link><guid isPermaLink="false">e2171afa-0c40-472f-a953-f4d1b73e855e</guid><category><![CDATA[cloud computing]]></category><dc:creator><![CDATA[LED Technica]]></dc:creator><pubDate>Fri, 01 Nov 2013 14:56:00 GMT</pubDate></item><item><title><![CDATA[Lateral Is Watching You]]></title><description><![CDATA[<blockquote>A designer knows he has achieved perfection not when there is nothing left to add, but when there is nothing left to take away. <span class="quoter">— ANTOINE DE SAINT EXUPÉRY</span>
+
+</blockquote>  
+
+<p>I have seen many web design sites and articles refer to the above or similar quotes that conveys the message less is more when it comes to <strong>great web design</strong>, which I tend to agree. As mentioned in “<a title="How to redesign the credit card entry to make it more user friendly" href='http://ledtechnica.dev/credit-card-entry-redesigned/' >Credit Card Entry Redesigned</a>”, unnecessary design elements on a web site, especially those without a clear function, can confuse the end users and take away from the experience. Every time a user has to ask themselves a question or try to figure out your website, their willingness to interact with it goes down and you see the results in your bounce rates.</p>
+
+<h2><em>Great web design</em> can be fun too</h2>  
+
+<p>But sometimes adding an element of fun to design – especially without functionality – can result in <em>great websites</em>. At the end of the day we are not all utilitarian design fanatics and a fun, personal touch can change our perception positively about a product or a company.</p>
+
+<p>Here is an example of a great web design from a design agency called <a title="About the Lateral Design Agency" href='http://www.lateral-inc.com/about-us/team/' >Lateral</a>. </p>
+
+<div classs="center" style="text-align:center;">  
+<iframe src='http://player.vimeo.com/video/75049846'  width="750" height="422" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>  
+</div>
+
+<p>While the animation might not add much in terms of functionality, it showcases the company's creativity and ability to think outside the box. But more importantly, by making a visitor smile, it provides a pleasant virtual interaction for the user hopefully resulting in a more positive view of the company. It sure brought a smile to my face.</p>]]></description><link>http://ledtechnica.dev/lateral-is-watching-you/</link><guid isPermaLink="false">b67155a9-4bc8-45ee-8c66-c5f71115144d</guid><category><![CDATA[design]]></category><dc:creator><![CDATA[LED Technica]]></dc:creator><pubDate>Fri, 20 Sep 2013 20:13:00 GMT</pubDate></item><item><title><![CDATA[Wildcard Subdomains in Heroku]]></title><description><![CDATA[<p><img class="alignright" alt="browser" src='http://ledtechnica.dev/content/images/2014/Mar/browser.png'  width="300" height="296" /></p>
+
+<p><strong>Wildcard subdomains</strong> are used primarily to handle name resolution to all subdomains for your domain. It is managed through a <a title="Description of Wildcard DNS records from Wikipedia" href='http://en.wikipedia.org/wiki/Wildcard_DNS_record' >wildcard DNS record</a>, which “is a record in a DNS zone that will match requests for non-existent domain names”.</p>
+
+<h2>Wildcard subdomains but why?</h2>  
+
+<p>I am working on a multitenant Ruby on Rails app that creates a subdomain for each registered account. The main reason for creating specific subdomains for each account is to scope <sup><a class="footnote-link" id="reference-1" title="Link to footnote on scoping" href="#footnote-1">[1]</a></sup> the associated data to prevent unauthorized access. While there are other ways to make this happen, such as using PostgreSQL schemas, I decided to go with scoping as it is somewhat simpler to implement.</p>
+
+<p>I needed to handle two technical details for this to happen. The first one was for my DNS service to resolve <em>each wildcard subdomain</em> to a correct host, which thanks to my DNS provider – <a title="DNSimple, a great DNS provider" href='http://dnsimple.com/' >DNSimple</a> – was relatively simple. All I needed to do was create a CNAME record for *.mydomain.com to point to my web server (which was proxy.herokuapp.com in my case).</p>
+
+<p>The second thing I needed to do to make the <span class="underline">wildcard subdomains</span> work was to find a way for my web server – which in my case was hosted by <a href='http://www.heroku.com/' >Heroku</a> – to correctly serve the application using that subdomain.</p>
+
+<p>While it is feasible to add the subdomain for each new client through an API call to Heroku after account creation so that the application only responds to specific client subdomains, I was lazy so I added the *.mydomain.com to my application's configuration in Heroku which worked greatly.</p>
+
+<h2>Until the day came</h2>  
+
+<p>When I realized that I needed to create another app on the same domain with a distinct subdomain. To see how I can best handle this case, I searched Heroku's knowledge base and came across an article on how to setup “<a title="Custom Domains article in Heroku Knowledge Base" href='https://devcenter.heroku.com/articles/custom-domains' >Custom Domains</a>”. Unfortunately it did not really apply to my scenario so I did the next best thing and checked on <a title="Stack Overflow - Q&amp;A site for programmers" href='http://stackoverflow.com/' >Stack Overflow</a>. While I seem to misplace the one link that kind of covered this scenario, after some research it seemed like it was not feasible to assign a new subdomain to another app.</p>
+
+<p>So I decided to test this out myself by:</p>
+
+<ol>  
+<li>Setting up a new app in Heroku and</li>  
+<li>Adding the specific subdomain — api.mydomain.com — to the new application in Heroku management console</li>  
+</ol>  
+
+<p>While I feel like the cat per <a href='http://www.quotegarden.com/experience.html' >Mark Twain's quote</a> below — not sure if there is any wisdom gained from this experience, so far this approach seems to work. My specific subdomain is pointing to the new application, while all other wildcard subdomains still point to the primary app.</p>
+
+<blockquote>We should be careful to get out of an experience only the wisdom that is in it - and stop there; lest we be like the cat that sits down on a hot stove-lid.  She will never sit down on a hot stove-lid again - and that is well; but also she will never sit down on a cold one anymore.
+
+</blockquote>  
+
+<p><p class="footnote" id="footnote-1"><sup>[1]</sup> Railscasts has a <a href='http://railscasts.com/episodes/388-multitenancy-with-scopes' >great episode</a> on scoping your users using subdomains. It is a pro episode and needs subscription but I strongly recommend it if you would like to learn about scoping your users/accounts. <a class="footnote-link" title="Jump back to footnote 1 in the text." href="#reference-1">↩</a></p>]]></description><link>http://ledtechnica.dev/wildcard-subdomains-in-heroku/</link><guid isPermaLink="false">a00783df-d265-4971-9651-8ec094698a72</guid><category><![CDATA[cloud computing]]></category><dc:creator><![CDATA[LED Technica]]></dc:creator><pubDate>Sat, 14 Sep 2013 02:42:00 GMT</pubDate></item><item><title><![CDATA[Credit Card Entry Redesigned]]></title><description><![CDATA[<p><img src='http://ledtechnica.dev/content/images/2014/Mar/skeuocard.png'  alt="" class="alignright" /></p>
+
+<p>Given the volume of online shopping <sup><a href="#footnote-1" class="footnote-link" id="reference-1" title="Link to footnote on e-commerce market size">[1]</a></sup> these days one would assume that customers are comfortable enough with the <strong>credit card entry interface</strong> for shopping online by now and that the interface is pretty much established. Well <a href='http://kenkeiter.com/'  title="Ken Keiter Website">Ken Keiter</a> definitely does not think so.</p>
+
+<p>In his article &ldquo;<a href='http://kenkeiter.com/2013/07/21/redesigning-credit-card-inputs/'  title="Redesigning credit card inputs">Redesigning Credit Card Inputs</a>&rdquo; Ken talks about <a href='http://en.wikipedia.org/wiki/Skeuomorph'  title="skeuomorphism">skeuomorphism</a> (which I heard for the first time) and why he decided to redesign the credit card entry process. I recommend you read the article but for me one comment really stood out:</p>
+
+<blockquote>Every question a user has to ask themselves during the checkout process is another reason for them not to complete it.</blockquote>
+
+<p>While it sure is challenging, this level of attention to every little detail of the user experience design is what makes products, services, and websites stand out and in the end achieve more success than its competitors. It is what Steve Jobs did with iPhone and revolutionized the cell phone industry. It is what Disney is <a href='http://www.wired.com/design/2013/08/design-and-the-digital-world/'  title="Design and the Digital World">working on</a> in trying to improve every aspect of the user experience design for all visitors to its theme parks.</p>
+
+<p>Of course paying this level of attention to all facets of user experience design is almost impossible (and in most cases not desired) for a start-up but you and your team members should be mindful of and try to embrace it in your decisions. When discussing whether to add a feature or how to implement an user interface element, you should always ask if it is needed and whether there is a better and more natural way to present it to your users? </p>
+
+<p>While these discussions might slightly increase your work load initially, pretty soon this kind of approach will start to become the norm and you will hopefully end up with a much better thought out product.</p>
+
+<p>Anyway check out <a href='http://kenkeiter.com/skeuocard/'  title="skeuocard">Skeuocard</a> for yourself and decide if you would like to incorporate it in your site.</p>
+
+<p><p id="footnote-1" class="footnote"><sup>[1]</sup> In 2011 &ldquo;2-commerce B2C product sales totaled $142.5 billion, representing about 8% of retail product sales in the United States.&rdquo; &ndash; Source: <a href='http://en.wikipedia.org/wiki/Online_shopping' #Market_share" title="Ecommerce Sales">Wikipedia</a>. <a href="#reference-1" title="Jump back to footnote 1 in the text." class="footnote-link">↩</a></p>]]></description><link>http://ledtechnica.dev/credit-card-entry-redesigned/</link><guid isPermaLink="false">c881b92d-f1d5-4778-911b-ef099112deb5</guid><category><![CDATA[design]]></category><dc:creator><![CDATA[LED Technica]]></dc:creator><pubDate>Mon, 26 Aug 2013 15:16:00 GMT</pubDate></item><item><title><![CDATA[Heroku Hosting - Is it for Idiots?]]></title><description><![CDATA[<p><img class="alignright" alt="Cloud Server on the Sky" src='http://ledtechnica.dev/content/images/2014/Mar/cloud_300x199.jpg'  width="300" height="199" /></p>
+
+<p>The other day I came across an article titled <a title="Heroku Isn't For Idiots" href='http://www.rdegges.com/heroku-isnt-for-idiots/' >“Heroku Isn’t for Idiots”</a> written by Randall Degges which was about the cloud hosting provider <a title="Heroku" href='https://www.heroku.com/' >Heroku</a> – a major cloud hosting solutions provider. While I agree with its basic premise of focusing on your core strengths and outsourcing things that you are not most efficient to better qualified parties — such as using a managed cloud hosting as opposed to managing your own infrastructure — I was also intrigued by a reference to an “<strong>incredibly fraudulent article which really made my blood boil</strong>”.</p>
+
+<p>The “<strong>guilty</strong>” article titled <a title="The Cloud Is Not For You" href='http://justcramer.com/2012/06/02/the-cloud-is-not-for-you/' >“The Cloud Is Not For You”</a> was written by David Cramer. I do not know David (or Randall for that matter) but I really did not think his article was fraudulent. To the contrary, I felt like David was just sharing his personal experience with <strong>Heroku</strong> and trying to debunk the myth that cloud web hosting is the right answer to every problem.</p>
+
+<p>While both articles and the commentaries made for informative and entertaining reads, it also reminded me of similar arguments that are unfortunately too common with respect to IT systems and applications.  </p>
+
+<h3>I guess it is in our nature</h3>  
+
+<p>By nature, IT folk love and trust technology. They are usually opinionated, have strong preferences (just ask any Vim user) and best of all are not afraid to “share” their expertise and opinions. While these are usually awesome traits (just look at all the open source projects and the freely available materials), this combination can sometimes cause us to dismiss and criticize too easily those things that do not fit in with our reality.</p>
+
+<p>For example, one criticism for David was that by not utilizing Heroku (or cloud hosting in general), he lost the ability to scale efficiently and has to work much harder to achieve a robust service platform, which leads to the question: <br />
+<strong>“Do all applications need a high–level of robustness &amp; availability?”</strong></p>
+
+<p>And the answer in most cases is a no. Going from 99.99% to 99.999% availability reduces the maximum allowable downtime in a year from 52.56 to 5.26 minutes. Obviously these two goals will require a totally different approach to architecture, design, and implementation.</p>
+
+<p>Actually David makes a great point in his follow-up article that he published the next day (<a title="Scaling Your Clouds" href='http://justcramer.com/2012/06/03/scaling-your-clouds/' >Scaling Your Clouds</a>), in which he states:</p>
+
+<p>“I built <a title="Get Sentry" href='https://getsentry.com/' >getsentry.com</a> specifically with the goal of <strong>optimizing cost vs profit margins</strong>. This is the <strong>first month that it’s been profitable</strong>, and unless every single customer jumps ship at once, it’s unlikely that I will ever have to put my own money (excluding my time) into the project again.”</p>
+
+<p>It is clear that David has made a conscious decision about how to run his business: keeping costs down by using own infrastructure was more important than (in some cases the perceived) robustness and availability offered by cloud hosting providers.</p>
+
+<p>I think this is a good reminder for all of us that it is important to keep an open mind about different approaches and technologies and as an app developer we should try to understand what we are trying to achieve first and then design and implement the software and the required infrastructure.</p>]]></description><link>http://ledtechnica.dev/heroku-hosting-is-it-for-idiots/</link><guid isPermaLink="false">70678ef5-8b9f-4c99-b763-dff81d6b0914</guid><category><![CDATA[cloud computing]]></category><dc:creator><![CDATA[LED Technica]]></dc:creator><pubDate>Sun, 11 Aug 2013 05:14:00 GMT</pubDate></item><item><title><![CDATA[W3 Total Cache and Amazon CloudFront]]></title><description><![CDATA[<p>Recently I installed <a href='http://wordpress.org/plugins/w3-total-cache/'  title="W3 Total Cache" target="_blank">W3 Total Cache</a> plugin, which I heard good things about, in one of my blogs that is hosted on <a href='https://www.digitalocean.com/'  title="Digital Ocean" target="_blank">Digital Ocean</a> Ubuntu droplet. Once I went in to configure the plug-in, however, the Amazon CloudFront option was greyed out under the CDN settings.</p>
+
+<p>In case someone else runs into the same issue, the fix was to install the php5-curl package with the following command:</p>
+
+<p><code>sudo apt-get install php5-curl </code></p>]]></description><link>http://ledtechnica.dev/w3-total-cache-and-amazon-cloudfront/</link><guid isPermaLink="false">a5eab7ef-a91a-4613-a6ea-8756b31d627a</guid><category><![CDATA[wordpress]]></category><dc:creator><![CDATA[LED Technica]]></dc:creator><pubDate>Thu, 08 Aug 2013 17:42:00 GMT</pubDate></item><item><title><![CDATA[Starting It Up: Then A Miracle Occurs]]></title><description><![CDATA[<p>So you have an idea and you are thinking of "<strong>starting it up</strong>" - i.e. going for it. You are fueled by all the stories du jour about a company being sold for a huge amount of money and you can't wait to do the same.</p>
+
+<p><img src='http://star.psy.ohio-state.edu/coglab/Pictures/miracle.gif'  alt="Then a miracle occurs" style="float: right;" /></p>
+
+<p>If you are lucky, you do not end there and actually start working on it. You talk to your family and friends, explain your idea all excitedly, and then the questions start pouring in - how is it different from product X, how will you market/sell it, and the list goes on. </p>
+
+<p>Don't get me wrong, these <em><strong>questions are great</strong></em>. The more questions you get, the more you are forced to think about your approach in more depth -  especially when talking to people from your targeted problem domain.</p>
+
+<p>But hearing those questions that "you know you have to answer but do not yet know how" over and over again will finally get to you. You feel like you are going to fail because you cannot answer these questions even though you have been working at it for a while.</p>
+
+<p>And this was the stage I was in when I came across (again) the following quote from <a href='http://en.wikipedia.org/wiki/Steve_Jobs'  title="In case you have been asleep for the past 20 years" target="_blank">Steve Jobs</a> on the <a href='http://37signals.com/svn'  title="Signal vs Noise" target="_blank">37Signals blog</a>:</p>
+
+<blockquote>You know, one of the things that really hurt Apple was after I left John Sculley got a very serious disease. It’s the disease of thinking that a really great idea is 90% of the work. And if you just tell all these other people “here’s this great idea,” then of course they can go off and make it happen.
+
+And the problem with that is that there’s just a tremendous amount of craftsmanship in between a great idea and a great product. And as you evolve that great idea, it changes and grows. It never comes out like it starts because you learn a lot more as you get into the subtleties of it. And you also find there are tremendous tradeoffs that you have to make. There are just certain things you can’t make electrons do. There are certain things you can’t make plastic do. Or glass do. Or factories do. Or robots do.
+
+Designing a product is keeping five thousand things in your brain and fitting them all together in new and different ways to get what you want. And every day you discover something new that is a new problem or a new opportunity to fit these things together a little differently.
+
+And it’s that process that is the magic.</blockquote>
+
+<p>I've always believed that execution was as important, if not more, than the idea itself. But I quickly found out that this is easier said than done. And given my frame of mind, I appreciated this quote even more than the first time I read it as it applied so well to "designing my idea".</p>
+
+<p>Having to deal with so many different things - some of which you have no expertise in - to turn your idea into reality is one of the most difficult skills you should learn as an entrepreneur. And I really wish I could say "I have figured this out" after 8 difficult months working on an idea but I can't. </p>
+
+<p>So I remind myself daily that it is OK to not have all the answers right now and that all I can do is to keep "<strong>starting it up</strong>" and stick to my plan as that is the only way I can achieve "magic".</p>]]></description><link>http://ledtechnica.dev/starting-it-up-then-a-miracle-occurs/</link><guid isPermaLink="false">cc3aa1ea-5c67-4998-953d-8cdbf92189b0</guid><category><![CDATA[entrepreneurship]]></category><dc:creator><![CDATA[LED Technica]]></dc:creator><pubDate>Thu, 06 Jun 2013 04:47:00 GMT</pubDate></item><item><title><![CDATA[Closing Apps on iOS 7]]></title><description><![CDATA[<p>Of course you could not wait and upgraded your iPhone to iOS 7. In addition to figuring out which of your apps do not work on the new iOS, you also can not figure what to do for closing apps on your iPhone?</p>
+
+<p>Well here is a quick tip on <i>closing apps</i> on your iPhone using the new <a title="Apple iOS" href='http://www.apple.com/ios/' >iOS7</a> interface:  </p>
+
+<ul>  
+    <li>Double click on home button to start the task manager screen</li>
+    <li>Scroll right or left to find the application you want</li>
+    <li>Push the app window upwards for <strong>closing the app</strong></li>
+</ul>]]></description><link>http://ledtechnica.dev/closing-apps-on-ios-7/</link><guid isPermaLink="false">668a4e64-2249-4b63-a0c4-1e9ef98f7a36</guid><dc:creator><![CDATA[LED Technica]]></dc:creator><pubDate>Thu, 20 Sep 2012 15:47:00 GMT</pubDate></item><item><title><![CDATA[Innovational Change]]></title><description><![CDATA[<h2 id="whatisinnovationalchange">What is Innovational Change?</h2>
+
+<p><img class="alignright" alt="innovational-change" src='http://ledtechnica.dev/content/images/2014/Mar/innovational_change.png'  width="386" height="257" /></p>
+
+<p>I hate to disappoint you right off the bat but “<em>innovational change</em>” is a term I decided to use to describe something interesting has been happening in the enterprise IT space during the recent years.</p>
+
+<p>All of us are being exposed to a myriad of new tools and technologies - be it web or mobile based, as well as new gadgets that significantly change the way we work. Just look at how <a title="Apple Company Info" href='http://www.forbes.com/companies/apple/' >Apple</a> changed the technology landscape with the <a title="Apple iPad" href='http://www.apple.com/ipad/' >iPad</a>. And we start expecting the same functionality, flexibility, and user experience from our enterprise applications and hardware — <strong>we end users are becoming too demanding</strong>!</p>
+
+<p>In most cases, however, the enterprise IT is not able to meet these needs – sometimes for valid reasons but most of the time due to lack of flexibility in their underlying application and support infrastructure.</p>
+
+<p>There are a large number of articles discussing innovation and organizational change – i.e. the <em><a title="Definition of Consumerization" href='http://en.wikipedia.org/wiki/Consumerization' >consumerization</a> of IT</em> and it keeps gaining traction as a wide range of mobile technologies and devices are becoming more popular. While this trend is currently most apparent with users wanting to utilize their own mobile devices to access enterprise systems and data, I do not think this captures the entire essence of the issue.</p>
+
+<h3>Operational vs. Innovational Change</h3>  
+
+<p>To better describe the issue I would like to talk about two types of change that I am calling operational and innovational change for lack of a better term. I use the term <strong>operational change</strong> to refer to those activities carried out by the enterprise IT departments to improve operations and infrastructure or to address potential technology and/or business risks. These might be things such as deploying a better integrated and more secure enterprise-wide single sign-on system or server virtualization to improve efficiencies and reduce costs. There are a lot of competing technologies and vendors in these areas and most enterprise IT departments do a decent job given their operational, financial and technical constraints.</p>
+
+<p>I use <strong>innovational change</strong>, on the other hand, to refer to capturing opportunities that might not be inherently apparent but is brewing under the surface. While these opportunities are more difficult to identify compared to operational change (e.g. we need to upgrade our desktop OS as we are at the end of our support lifecycle), on occasion they get closer to the surface. Unfortunately they sometimes arrive packaged in a hype that enterprises do not stop to fully grasp the implications or know how to manage innovation.</p>
+
+<p>I certainly remember the hype about the netbooks and their potential impact on enterprise. Not many companies jumped on that bandwagon but I am sure a lot of them seriously considered it. Now we are having a similar trend with iPads, as a lot of enterprises are experimenting with how to integrate them into their workflow. You might be thinking “duh, users want mobility” but it is more than that. Users want to <strong>work on their own terms, using tools that are easy to use and they are already comfortable with</strong>.</p>
+
+<p>How else would you explain the enterprise IT's constant fight against <a title="Dropbox" href='http://www.dropbox.com/' >Dropbox</a>, <a title="Skype" href='http://www.skype.com/' >Skype</a>, and various other tools that users keep reverting to even though enterprise based alternatives exist?</p>
+
+<p>At this point you might be thinking “so smarta** what is the solution?” and my answer would be to <strong>stop following the hype and get to know your business and users</strong>. As obvious as this advice might be, I have seen over and over again IT managers evaluating tools or technologies after a skin deep needs analysis as opposed to trying to really understand the needs that necessitated the change in the first place. This is usually followed up by selecting a tool/technology based on this not so well understood need and then deploying very specialized tools that would enable this <em>'hot new'</em> thing in the enterprise. Unfortunately each iteration results in systems and tools that are very tightly coupled and less flexible.</p>
+
+<p>I actually heard a <a title="An Event Apart speaker Karen McGrane" href='http://aneventapart.com/speakers/karenmcgrane/' >very good presentation</a> by Karen McGrane in a conference recently about two different approaches taken by NPR and Conde Nast. NPR identified their needs and built a content delivery system based on APIs (COPE - Create Once Publish Everywhere), whereas Conde Nast went with developing custom layouts for iPad (one for portrait and once for landscape).</p>
+
+<p>While Conde Nast was facing difficulties creating layouts for all their different publications, the API enabled NPR was able to <a href='http://www.appconomy.com/theappconomy/2011/04/how-npr-went-mobile-step-2-leveraging-its-api-across-apps/' > develop an iPad app in 5 weeks</a>. Furthermore, NPR is at a much better position to develop apps to any new platform to come up. This is just one example of a company looking into their needs and coming with a strategy that solves these problems as opposed to picking a CMS and trying to work around it.</p>
+
+<p>I strongly believe that having this <strong>innovational change focus</strong> that keeps an eye on industry trends and cross-referencing them against your company's and users' needs would yield greater benefits in the long run. Some upfront thinking, combined with well defined metrics would be key to implement this strategy. In NPR's case for example, the <a title="NPR's metrics strategy" href='http://panelpicker.sxsw.com/ideas/view/7331' >total page views went up by 80%</a> after COPE was implemented. Furthermore they were able to respond to new platforms in a matter of weeks. This is just one example but a powerful one at that.</p>]]></description><link>http://ledtechnica.dev/innovational-change/</link><guid isPermaLink="false">ffdd7129-2897-4a5d-b886-a81d94f410b5</guid><dc:creator><![CDATA[LED Technica]]></dc:creator><pubDate>Tue, 22 Nov 2011 04:31:00 GMT</pubDate></item></channel></rss>
