@@ -552,3 +552,25 @@ footer.post-footer {
  * 6. Queries
  * -----------------------------------------------------------------
 **/
+@media handheld, only screen and (min-width: 320px) and (max-width: 767px) {
+  footer section span.copyright {
+    display: block;
+  }
+  nav li {
+    width: auto;
+  }
+  .pagination .older-posts,
+  .pagination .newer-posts {
+    position: static;
+    margin: 10px 0;
+  }
+  .pagination .newer-posts {
+    margin-right: 15px;
+  }
+  .pagination .older-posts {
+    margin-left: 15px;
+  }
+  .pagination .page-number {
+    display: none;
+  }
+}
