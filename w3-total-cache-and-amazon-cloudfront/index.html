@@ -1,48 +1,69 @@
 <!DOCTYPE html>
-<html>
+<!--[if IE 9]><html class="lt-ie10" lang="en" > <![endif]-->
+<html class="no-js" lang="en" >
+
 <head>
-    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>W3 Total Cache and Amazon CloudFront</title>
-    <meta name="description" content="" />
+  <title>W3 Total Cache and Amazon CloudFront</title>
+  <meta name="description" content="" />
 
-    <meta name="HandheldFriendly" content="True" />
-    <meta name="MobileOptimized" content="320" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- If you are using CSS version, only link these 2 files, you may add app.css to use for your overrides if you like. -->
+  <link rel="shortcut icon" href="../assets/favicon.ico">
+  <link rel="stylesheet" type="text/css" href="../assets/css/normalize.css" />
+  <link rel="stylesheet" type="text/css" href="../assets/css/foundation.min.css" />
+  <link rel="stylesheet" type="text/css" href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" >
+  <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Gentium+Basic:400,700|Open+Sans:400,700|Open+Sans+Condensed:300" />
+  <link rel="stylesheet" type="text/css" href="../assets/css/main.css" />
 
-    <link rel="shortcut icon" href="../assets/favicon.ico">
-    <link rel="stylesheet" type="text/css" href="../assets/css/normalize.css" />
-    <link rel="stylesheet" type="text/css" href="../assets/css/main.css" />
-
-    <meta name="generator" content="Ghost 0.4" />
+  <meta name="generator" content="Ghost 0.4" />
 <link rel="alternate" type="application/rss+xml" title="LED Technica" href="../rss/index.html">
 <link rel="canonical" href="index.html" />
+
+  <script src="../assets/js/vendor/modernizr.min.js"></script>
+
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-18689260-11', 'ledtechnica.com');
+    ga('send', 'pageview');
+  </script>
+
 </head>
 <body class="post-template tag-wordpress">
 
-    <header id="site-head">
-  <div id="site-head-inner" class="grid grid-pad">
-    <h1 class="blog-title BrandonPrinted-One"><a href="../index.html">LED Technica</a></h1>
-    <h2 class="blog-description BrandonPrinted-One">&lt;3 everything web</h2>
+  <header id="site-header">
+  <div class="row site-header-inner">
+    <div class="small-12 columns">
+      <h1 class="blog-title"><a href="../index.html">LED Technica</a></h1>
+      <h2 class="blog-description">&lt;3 everything web</h2>
 
-    <div id="blog-social">
-      <a class="icon-twitter" href="http://twitter.com/ledtechnica"></a>
-      <a class="icon-google-plus" href="https://plus.google.com/+LEDTechnica"></a>
+      
+        <div id="blog-images" class="row">
+          <div class="small-1 small-offset-4 columns">
+            <a class="icon-twitter" href="http://twitter.com/ledtechnica"></a>
+          </div>
+          <div id="blog-logo" class="small-3 columns">
+            <img src="../content/images/2014/Mar/ledtechnica.png" alt="LED Technica">
+          </div>
+          <div class="small-1 columns end">
+            <a class="icon-google-plus" href="https://plus.google.com/+LEDTechnica"></a>
+          </div>
+        </div>
+      
+
     </div>
-
-    
-      <div id="blog-logo">
-        <img src="../content/images/2014/Mar/ledtechnica.png" alt="LED Technica">
-      </div>
-    
   </div>
 </header>
 
-    
+  
 
-<main class="content" role="main">
-  <div class="grid grid-pad grid-center">
+<main class="content row" role="main">
+  <div class="small-12 columns">
   <article class="post tag-wordpress">
     
       <header>
@@ -110,8 +131,8 @@
   </div>
 </main>
 
-    <footer class="site-footer">
-  <div class="inner">
+  <footer class="site-footer">
+  <div class="inner row">
      <a href="../rss/index.html" title="Subscribe!" class="tooltip subscribe"><i class="fa fa-rss"></i></a>
     <section class="copyright">
       &copy; 2014 <a href="../index.html">LED Technica</a>. All rights reserved.
@@ -119,19 +140,17 @@
   </div>
 </footer>
 
+  
+  <script src="../shared/vendor/jquery/jquery.js?v=51f1bfe767"></script>
 
-    <script src="../shared/vendor/jquery/jquery.js?v=179f051b8c"></script>
+  <script src="../assets/js/foundation.min.js"></script>
+  <script>
+    $(document).foundation();
+  </script>
 
-    <script type="text/javascript">
-      var _gaq = _gaq || [];
-      _gaq.push(['_setAccount', 'UA-18689260-11']);
-      _gaq.push(['_trackPageview']);
+  <script>
+    document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')
+  </script>
 
-      (function() {
-        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-      })();
-    </script>
 </body>
 </html>
