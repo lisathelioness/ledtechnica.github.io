@@ -6,7 +6,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Wildcard Subdomains in Heroku</title>
+  <title>Where to add Google Analytics code?</title>
   <meta name="description" content="" />
 
   <!-- If you are using CSS version, only link these 2 files, you may add app.css to use for your overrides if you like. -->
@@ -36,7 +36,7 @@
   <link rel="next" href="http://ledtechnica.dev/next"/>
   <link rel="prev" href="http://ledtechnica.dev/prev"/>
 </head>
-<body class="post-template tag-cloud-computing">
+<body class="post-template tag-code">
 
   <header id="site-header">
   <div class="row site-header-inner">
@@ -67,60 +67,33 @@
 
 <main class="content row" role="main">
   <div class="small-12 columns">
-  <article class="post tag-cloud-computing">
+  <article class="post tag-code">
     
       <header>
-        <div class="post-meta tags">Posted in cloud computing</div>
-        <h1 class="post-title">Wildcard Subdomains in Heroku</h1>
-        <div class="post-meta"><time datetime="2013-09-13">7 months ago</time></div>
+        <div class="post-meta tags">Posted in code</div>
+        <h1 class="post-title">Where to add Google Analytics code?</h1>
+        <div class="post-meta"><time datetime="2014-03-29">a few seconds ago</time></div>
       </header>
 
       <section class="post-content">
-        <p><img class="alignright" alt="browser" src="../content/images/2014/Mar/browser.png" width="300" height="296" /></p>
+        <p>If you use <a href="http://google.com/analytics">Google Analytics</a>, one of the first questions you find yourself asking is &ldquo;<em>where to add the Google Analytics code?</em>&rdquo; on your page. The answer to this question was usually right before the closing &lt;/body&gt; tag since earlier versions of the analytics code was synchronous. Hence it was best practice to include the code towards the end of your page (at which point most of the page content was already visible on the screen) in order to provide a better end user experience.</p>
 
-<p><strong>Wildcard subdomains</strong> are used primarily to handle name resolution to all subdomains for your domain. It is managed through a <a title="Description of Wildcard DNS records from Wikipedia" href="http://en.wikipedia.org/wiki/Wildcard_DNS_record">wildcard DNS record</a>, which “is a record in a DNS zone that will match requests for non-existent domain names”.</p>
+<p>With the newer version of the code &ndash; which is asynchronous &ndash; <a href="https://support.google.com/analytics/answer/1008080">Google recommends that</a> the tracking code is included right before the closing &lt;/head&gt; tag. Since the code runs asynchronously it should no longer impact your page load time as it does not stop page rendering. This also has the added benefit of making sure the visit is tracked even if the user decides to navigate away before the whole page is loaded.</p>
 
-<h2>Wildcard subdomains but why?</h2>  
-
-<p>I am working on a multitenant Ruby on Rails app that creates a subdomain for each registered account. The main reason for creating specific subdomains for each account is to scope <sup><a class="footnote-link" id="reference-1" title="Link to footnote on scoping" href="index.html#footnote-1">[1]</a></sup> the associated data to prevent unauthorized access. While there are other ways to make this happen, such as using PostgreSQL schemas, I decided to go with scoping as it is somewhat simpler to implement.</p>
-
-<p>I needed to handle two technical details for this to happen. The first one was for my DNS service to resolve <em>each wildcard subdomain</em> to a correct host, which thanks to my DNS provider – <a title="DNSimple, a great DNS provider" href="http://dnsimple.com">DNSimple</a> – was relatively simple. All I needed to do was create a CNAME record for *.mydomain.com to point to my web server (which was proxy.herokuapp.com in my case).</p>
-
-<p>The second thing I needed to do to make the <span class="underline">wildcard subdomains</span> work was to find a way for my web server – which in my case was hosted by <a href="http://www.heroku.com/">Heroku</a> – to correctly serve the application using that subdomain.</p>
-
-<p>While it is feasible to add the subdomain for each new client through an API call to Heroku after account creation so that the application only responds to specific client subdomains, I was lazy so I added the *.mydomain.com to my application's configuration in Heroku which worked greatly.</p>
-
-<h2>Until the day came</h2>  
-
-<p>When I realized that I needed to create another app on the same domain with a distinct subdomain. To see how I can best handle this case, I searched Heroku's knowledge base and came across an article on how to setup “<a title="Custom Domains article in Heroku Knowledge Base" href="https://devcenter.heroku.com/articles/custom-domains">Custom Domains</a>”. Unfortunately it did not really apply to my scenario so I did the next best thing and checked on <a title="Stack Overflow - Q&amp;A site for programmers" href="http://stackoverflow.com/">Stack Overflow</a>. While I seem to misplace the one link that kind of covered this scenario, after some research it seemed like it was not feasible to assign a new subdomain to another app.</p>
-
-<p>So I decided to test this out myself by:</p>
-
-<ol>  
-<li>Setting up a new app in Heroku and</li>  
-<li>Adding the specific subdomain — api.mydomain.com — to the new application in Heroku management console</li>  
-</ol>  
-
-<p>While I feel like the cat per <a href="http://www.quotegarden.com/experience.html">Mark Twain's quote</a> below — not sure if there is any wisdom gained from this experience, so far this approach seems to work. My specific subdomain is pointing to the new application, while all other wildcard subdomains still point to the primary app.</p>
-
-<blockquote>We should be careful to get out of an experience only the wisdom that is in it - and stop there; lest we be like the cat that sits down on a hot stove-lid.  She will never sit down on a hot stove-lid again - and that is well; but also she will never sit down on a cold one anymore.
-
-</blockquote>  
-
-<p><p class="footnote" id="footnote-1"><sup>[1]</sup> Railscasts has a <a href="http://railscasts.com/episodes/388-multitenancy-with-scopes">great episode</a> on scoping your users using subdomains. It is a pro episode and needs subscription but I strongly recommend it if you would like to learn about scoping your users/accounts. <a class="footnote-link" title="Jump back to footnote 1 in the text." href="index.html#reference-1">↩</a></p>
+<p>Note that you might not always be able to control this behavior precisely. For example, if you are using WordPress, the theme selected will usually provide a configuration option to add the tracking code. Where your Google Analytics code gets placed will then depend on how the theme author implemented the page setup. Of course you can change the underlying code in the theme to fix this which might create additional headache each time the theme gets updated.</p>
       </section>
 
       <section class="share">
         <p class="info">Share this post</p>
-        <a class="icon-twitter" href="http://twitter.com/share?text=Wildcard Subdomains in Heroku&url=http://ledtechnica.dev/wildcard-subdomains-in-heroku/"
+        <a class="icon-twitter" href="http://twitter.com/share?text=Where to add Google Analytics code?&url=http://ledtechnica.dev/where-to-add-google-analytics-code/"
         onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
         <span class="hidden">Twitter</span>
         </a>
-        <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=http://ledtechnica.dev/wildcard-subdomains-in-heroku/"
+        <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=http://ledtechnica.dev/where-to-add-google-analytics-code/"
         onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
         <span class="hidden">Facebook</span>
         </a>
-        <a class="icon-google-plus" href="https://plus.google.com/share?url=http://ledtechnica.dev/wildcard-subdomains-in-heroku/"
+        <a class="icon-google-plus" href="https://plus.google.com/share?url=http://ledtechnica.dev/where-to-add-google-analytics-code/"
         onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
         <span class="hidden">Google+</span>
         </a>
@@ -145,7 +118,7 @@
         var disqus_shortname = 'ledtechnica'; // required: replace example with your forum shortname
 
         /* * * DON'T EDIT BELOW THIS LINE * * */
-        var disqus_identifier = '8';
+        var disqus_identifier = '15';
 
         (function() {
             var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
